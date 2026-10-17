@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "run_id": "32e981b6558f448e97fd52d492dddaf9",
+  "state": "completed",
+  "error_code": null,
+  "calls": {
+    "catalog": 1,
+    "nemotron": 4,
+    "cosmos": 1,
+    "capture": 1,
+    "place": 1,
+    "request_bytes": 13798
+  },
+  "final_decision": {
+    "decision": "complete",
+    "reason_code": "check_passed"
+  },
+  "check_id": "109b241e8ff34a25aec53dbf9e60b6a8",
+  "check_passed": true
+}

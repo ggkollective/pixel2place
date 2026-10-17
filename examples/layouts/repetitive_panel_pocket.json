@@ -1,0 +1,323 @@
+{
+  "project_version": "0.1",
+  "board": {
+    "type": "grid",
+    "rows": 8,
+    "cols": 8,
+    "cell_size_mm": 20.0
+  },
+  "palette": [
+    "blue",
+    "gray",
+    "orange",
+    "white"
+  ],
+  "parts": [
+    {
+      "part_id": "P001",
+      "type": "rect_tile",
+      "color": "blue",
+      "cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P002",
+      "type": "rect_tile",
+      "color": "gray",
+      "cells": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P003",
+      "type": "L_tile",
+      "color": "white",
+      "cells": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P004",
+      "type": "square_tile",
+      "color": "white",
+      "cells": [
+        [
+          1,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P005",
+      "type": "L_tile",
+      "color": "orange",
+      "cells": [
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P006",
+      "type": "T_tile",
+      "color": "blue",
+      "cells": [
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P007",
+      "type": "T_tile",
+      "color": "gray",
+      "cells": [
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P008",
+      "type": "square_tile",
+      "color": "orange",
+      "cells": [
+        [
+          3,
+          3
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P009",
+      "type": "rect_tile",
+      "color": "blue",
+      "cells": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P010",
+      "type": "rect_tile",
+      "color": "gray",
+      "cells": [
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P011",
+      "type": "L_tile",
+      "color": "white",
+      "cells": [
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P012",
+      "type": "square_tile",
+      "color": "white",
+      "cells": [
+        [
+          5,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P013",
+      "type": "L_tile",
+      "color": "orange",
+      "cells": [
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P014",
+      "type": "T_tile",
+      "color": "blue",
+      "cells": [
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          2
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P015",
+      "type": "T_tile",
+      "color": "gray",
+      "cells": [
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          6
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P016",
+      "type": "square_tile",
+      "color": "orange",
+      "cells": [
+        [
+          7,
+          3
+        ]
+      ],
+      "rotation_deg": 0
+    }
+  ],
+  "feasible": true,
+  "notes": []
+}

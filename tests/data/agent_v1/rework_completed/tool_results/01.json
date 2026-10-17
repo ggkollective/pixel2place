@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "run_id": "01d76e0f3ed045838808fe05a3437fe8",
+  "tool_call_id": "call-1",
+  "artifacts": [
+    {
+      "id": "40f45cdf711a47e0b53231bd0a69500d",
+      "kind": "layout"
+    }
+  ],
+  "status": "ok",
+  "error_code": null,
+  "recoverable": false,
+  "summary": {
+    "part_count": 4,
+    "planned_part_count": 4,
+    "plan_feasible": true,
+    "parsed_feasible": true,
+    "repair_count": 0,
+    "cell_accuracy": 1.0,
+    "parts": [
+      {
+        "part_id": "P001",
+        "type": "L_tile",
+        "color": "blue",
+        "rotation_deg": 0,
+        "row": 0,
+        "col": 0
+      },
+      {
+        "part_id": "P002",
+        "type": "T_tile",
+        "color": "gray",
+        "rotation_deg": 0,
+        "row": 0,
+        "col": 3
+      },
+      {
+        "part_id": "P003",
+        "type": "rect_tile",
+        "color": "blue",
+        "rotation_deg": 90,
+        "row": 4,
+        "col": 4
+      },
+      {
+        "part_id": "P004",
+        "type": "square_tile",
+        "color": "white",
+        "rotation_deg": 0,
+        "row": 7,
+        "col": 7
+      }
+    ],
+    "part_counts": [
+      {
+        "type": "L_tile",
+        "color": "blue",
+        "count": 1
+      },
+      {
+        "type": "T_tile",
+        "color": "gray",
+        "count": 1
+      },
+      {
+        "type": "rect_tile",
+        "color": "blue",
+        "count": 1
+      },
+      {
+        "type": "square_tile",
+        "color": "white",
+        "count": 1
+      }
+    ]
+  }
+}

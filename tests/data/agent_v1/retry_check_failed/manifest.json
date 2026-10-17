@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "run_id": "e1155f4bc4ff4dd2aafea1f09b3e5212",
+  "artifacts": [
+    {
+      "id": "bfd891253bf6480eb6127d204ff55322",
+      "kind": "inputs",
+      "layout_id": null,
+      "files": [
+        {
+          "path": "cell.json",
+          "sha256": "40b7f40bb6a18922a0e4c3942404a19988b66e56171c695ebb5034ffabfb4379"
+        },
+        {
+          "path": "evaluation/scene.json",
+          "sha256": "90b84e61147d2498c949ae4d3f22612f1c37a0c797cf643b19de199965d26a06"
+        },
+        {
+          "path": "run.json",
+          "sha256": "be2af774ac7f978698118aee35dd8eac5848b0c5acd5eac85df37c4d131cc0e3"
+        }
+      ]
+    },
+    {
+      "id": "623afa3f789e44c59599575a2abd2836",
+      "kind": "layout",
+      "layout_id": null,
+      "files": [
+        {
+          "path": "attempts/02/layout.json",
+          "sha256": "e2c9be51f5e1f76783ddae974fa58163064adae522439fa1c943478f97a8e4d3"
+        },
+        {
+          "path": "attempts/02/plan_layout.json",
+          "sha256": "e2c9be51f5e1f76783ddae974fa58163064adae522439fa1c943478f97a8e4d3"
+        },
+        {
+          "path": "attempts/02/report.json",
+          "sha256": "11c5dc1bcd3ebbb69a04b89542ab7b19adb874a871dd967f0a61410f7f08d2fe"
+        },
+        {
+          "path": "attempts/02/raw_image.png",
+          "sha256": "34f44656f94bb0ce8fd24e8dd5b11b84e47961b7aa89dfb795181f82576b20f3"
+        },
+        {
+          "path": "attempts/02/normalized_image.png",
+          "sha256": "34f44656f94bb0ce8fd24e8dd5b11b84e47961b7aa89dfb795181f82576b20f3"
+        }
+      ]
+    },
+    {
+      "id": "28e6aa537ba14cf0a47e11e56af25c9e",
+      "kind": "calibration",
+      "layout_id": "623afa3f789e44c59599575a2abd2836",
+      "files": [
+        {
+          "path": "calibration/cell.json",
+          "sha256": "3426ea0893bccecf8a7cc5c9e0b7102c9548abfde93f9c7f205c3886dc785380"
+        },
+        {
+          "path": "calibration/cell.report.json",
+          "sha256": "44e74fa864a92bb486739911093a5b0faaf8307efee7357f1ca82211cd059a46"
+        },
+        {
+          "path": "calibration/cell.overlay.png",
+          "sha256": "d8a8b47f0a408b943531656a1bf473dad20471e2b6bf9e2cb453ce6f17a38915"
+        },
+        {
+          "path": "capture/capture.json",
+          "sha256": "ba09cef4ab8786dace0d41dea8cce7b83236b55662eb45a071edeba34416c476"
+        },
+        {
+          "path": "capture/topdown_start.png",
+          "sha256": "5f65c1c8dc74af7e27925d12787800fbb1a5acd0b8bb2912418a9ba4c56080c2"
+        },
+        {
+          "path": "capture/camera.json",
+          "sha256": "90197dd6bbe0b8c0f115467c6369070363d1d075e3639da9d2f168b8417d89be"
+        },
+        {
+          "path": "evaluation/camera_truth.json",
+          "sha256": "90197dd6bbe0b8c0f115467c6369070363d1d075e3639da9d2f168b8417d89be"
+        }
+      ]
+    },
+    {
+      "id": "a904d601bc46436ea811ef3be3bc0173",
+      "kind": "check",
+      "layout_id": null,
+      "files": [
+        {
+          "path": "execution/check.json",
+          "sha256": "e0cbd01525501f63a3bb156ef9ff5af29189f8735a9ab42e88bf8b4f04d53dd5"
+        },
+        {
+          "path": "execution/task.json",
+          "sha256": "816fe8861bfcdb74ced6e593c4dbb91858b49560d88635a20a6368a2882b0775"
+        },
+        {
+          "path": "execution/sim/result.json",
+          "sha256": "541fb638255fcf58f4b59fdda0c016069ab710224e95a33af7fca719007f482c"
+        }
+      ]
+    }
+  ]
+}

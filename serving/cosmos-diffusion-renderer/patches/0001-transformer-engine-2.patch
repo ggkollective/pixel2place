@@ -1,0 +1,86 @@
+SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+SPDX-License-Identifier: Apache-2.0
+
+pixel2place changes: Adapt the imports for Transformer Engine 2.x.
+
+diff --git a/cosmos_predict1/autoregressive/training/modules/attention.py b/cosmos_predict1/autoregressive/training/modules/attention.py
+index 9b1b6c8..a12bdd0 100644
+--- a/cosmos_predict1/autoregressive/training/modules/attention.py
++++ b/cosmos_predict1/autoregressive/training/modules/attention.py
+@@ -20,7 +20,9 @@ import torch
+ from megatron.core import ModelParallelConfig, parallel_state
+ from torch import nn
+ from torch.distributed import _functional_collectives as funcol
+-from transformer_engine.pytorch.attention import _SplitAlongDim, apply_rotary_pos_emb, check_set_window_size
++from transformer_engine.pytorch.attention.dot_product_attention.utils import check_set_window_size
++from transformer_engine.pytorch.attention.rope import apply_rotary_pos_emb
++from transformer_engine.pytorch.utils import SplitAlongDim as _SplitAlongDim
+ from transformer_engine.pytorch.constants import AttnBiasTypes
+ from transformer_engine.pytorch.float8_tensor import Float8Tensor
+ from transformer_engine.pytorch.module.linear import Linear as LinearTE
+diff --git a/cosmos_predict1/autoregressive/utils/parallel.py b/cosmos_predict1/autoregressive/utils/parallel.py
+index 05f7733..7aa05f4 100644
+--- a/cosmos_predict1/autoregressive/utils/parallel.py
++++ b/cosmos_predict1/autoregressive/utils/parallel.py
+@@ -24,11 +24,20 @@ from torch.distributed import broadcast, get_process_group_ranks
+ from transformer_engine.pytorch.jit import no_torch_dynamo
+ from transformer_engine.pytorch.module.base import TransformerEngineBaseModule
+ from transformer_engine.pytorch.module.rmsnorm import RMSNorm as RMSNormTE
+-from transformer_engine.pytorch.module.rmsnorm import _RMSNorm
+ 
+ from cosmos_predict1.utils import log
+ 
+ 
++class _RMSNorm:
++    """TE 2.x에는 _RMSNorm이 없다. DiffusionRenderer 추론은 이 경로를 쓰지 않는다."""
++
++    @staticmethod
++    def apply(*args, **kwargs):
++        raise NotImplementedError("Tensor-parallel RMSNorm needs Transformer Engine 1.x.")
++
++    forward = apply
++
++
+ def get_batch_on_this_cp_rank(inputs):
+     """Slice batch input along sequence dimension into multiple chunks,
+     which are parallelized across GPUs in a context parallel group.
+diff --git a/cosmos_predict1/diffusion/module/attention.py b/cosmos_predict1/diffusion/module/attention.py
+index 2c0a4b0..e652cb5 100644
+--- a/cosmos_predict1/diffusion/module/attention.py
++++ b/cosmos_predict1/diffusion/module/attention.py
+@@ -21,7 +21,8 @@ import transformer_engine as te
+ from einops import rearrange
+ from torch import nn
+ from torch.utils.checkpoint import checkpoint
+-from transformer_engine.pytorch.attention import DotProductAttention, apply_rotary_pos_emb
++from transformer_engine.pytorch.attention import DotProductAttention
++from transformer_engine.pytorch.attention.rope import apply_rotary_pos_emb
+ 
+ # ---------------------- Feed Forward Network -----------------------
+ 
+diff --git a/cosmos_predict1/diffusion/training/module/blocks.py b/cosmos_predict1/diffusion/training/module/blocks.py
+index 255ab48..1e3cd4c 100644
+--- a/cosmos_predict1/diffusion/training/module/blocks.py
++++ b/cosmos_predict1/diffusion/training/module/blocks.py
+@@ -21,7 +21,7 @@ from einops import rearrange, repeat
+ from einops.layers.torch import Rearrange
+ from megatron.core import parallel_state
+ from torch import nn
+-from transformer_engine.pytorch.attention import apply_rotary_pos_emb
++from transformer_engine.pytorch.attention.rope import apply_rotary_pos_emb
+ 
+ from cosmos_predict1.diffusion.module.attention import Attention, GPT2FeedForward
+ from cosmos_predict1.diffusion.training.tensor_parallel import gather_along_first_dim
+diff --git a/cosmos_predict1/diffusion/training/utils/peft/lora_attn.py b/cosmos_predict1/diffusion/training/utils/peft/lora_attn.py
+index 269ac32..ba7ac50 100644
+--- a/cosmos_predict1/diffusion/training/utils/peft/lora_attn.py
++++ b/cosmos_predict1/diffusion/training/utils/peft/lora_attn.py
+@@ -16,7 +16,7 @@
+ import torch
+ from einops import rearrange
+ from torch.utils.checkpoint import checkpoint
+-from transformer_engine.pytorch.attention import apply_rotary_pos_emb
++from transformer_engine.pytorch.attention.rope import apply_rotary_pos_emb
+ 
+ from cosmos_predict1.diffusion.module.attention import Attention
+ from cosmos_predict1.diffusion.training.utils.peft.lora_net import LoRALinearLayer, TELoRALinearLayer

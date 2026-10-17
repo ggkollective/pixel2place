@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "run_id": "32e981b6558f448e97fd52d492dddaf9",
+  "prompt": "Place all four parts on the board. Keep their colors.",
+  "cell": {
+    "board_origin": [
+      0.115,
+      -0.08
+    ],
+    "row_direction": [
+      1.0,
+      0.0
+    ],
+    "col_direction": [
+      0.0,
+      1.0
+    ],
+    "feeder_center": [
+      0.14,
+      0.16
+    ],
+    "feeder_row_direction": null,
+    "feeder_col_direction": null,
+    "table_z": 0.0,
+    "part_height": 0.015,
+    "part_inset": 0.0015,
+    "grasp_depth": 0.006,
+    "pick_clearance": 0.002,
+    "release_clearance": 0.001,
+    "approach_clearance": 0.04,
+    "locator": {
+      "pin_diameter": 0.004,
+      "pin_height": 0.005,
+      "pin_chamfer": 0.0008,
+      "hole_width": 0.0044,
+      "hole_depth": 0.006,
+      "hole_chamfer": 0.0025
+    },
+    "part_chamfer": 0.002,
+    "markers": [
+      [
+        0.07,
+        -0.18
+      ],
+      [
+        0.2,
+        -0.18
+      ],
+      [
+        0.34,
+        -0.18
+      ],
+      [
+        0.34,
+        0.0
+      ],
+      [
+        0.34,
+        0.26
+      ],
+      [
+        0.25,
+        0.26
+      ]
+    ],
+    "marker_diameter": 0.02
+  },
+  "agent": {
+    "model": "nvidia/Nemotron-3_5-Lightning",
+    "cosmos_model": "fake",
+    "budget": {
+      "max_inferences": 6,
+      "max_tokens": 2048,
+      "nemotron_timeout_s": 120.0,
+      "cosmos_timeout_s": 900.0,
+      "cosmos_max_tokens": 4096,
+      "sdk_retries": 0,
+      "max_layout_attempts": 2,
+      "cosmos_requests_per_attempt": 2,
+      "max_capture_runs": 1,
+      "max_place_runs": 1,
+      "sim_timeout_s": 1800.0,
+      "max_tool_bytes": 8192,
+      "max_request_bytes": 131072
+    },
+    "system_prompt": "You coordinate an industrial assembly simulation.\nThe user message is the original goal.\nThe runtime passes that goal to Cosmos without rewriting it.\nUse only a tool that the current state allows.\nReturn one function call in each tool response.\nUse the artifact IDs from tool results.\nDo not create IDs or change the goal.\nDo not provide paths, shell commands, joint values, scene truth, or tolerances.\nThe first prepare_layout call uses retry=false.\nAfter a recoverable layout error, you may call prepare_layout with retry=true once.\nDo not retry calibration or cell execution.\nRead status and passed as separate fields.\nAfter a passed check, return only this JSON object:\n{\"decision\":\"complete\",\"reason_code\":\"check_passed\"}\nTo stop, return only a JSON object with decision=\"abort\".\nUse the current error_code as reason_code, or use agent_aborted.\nDo not return free text or extra fields.\nDo not claim that the runtime checked every natural-language condition.\nFollow these state rules:\n1. In created, call prepare_layout with {\"retry\":false}, or abort.\n2. In layout_retryable, call prepare_layout with {\"retry\":true}, or abort.\n3. In layout_ready, call calibrate_board with the current layout_id, or abort.\n4. In calibrated, call execute_cell with the current layout_id and calibration_id, or abort.\n5. In checked, return the final JSON decision from the check result.\nA successful prepare_layout result means the layout is ready for calibration.\nDo not call prepare_layout again after a successful preparation.\nUse JSON booleans true and false. Do not use strings for booleans.\nTo abort in any state, return {\"decision\":\"abort\",\"reason_code\":\"agent_aborted\"}.\n"
+  }
+}

@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>pixel2place · Assembly cell</title>
+    <link rel="stylesheet" href="/ui/style.css" />
+    <script type="module" src="/ui/app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="pixel2place home"
+        ><span class="brand-icon" aria-hidden="true"></span
+        >pixel<span>2</span>place</a
+      >
+      <span class="topbar-divider"></span
+      ><span class="workspace-label">Assembly cell</span>
+      <span class="simulation-label"
+        ><span></span>CELL 01 · SIMULATED IN ISAAC SIM</span
+      >
+    </header>
+    <main>
+      <section class="intro">
+        <div class="intro-main">
+          <p class="eyebrow">ONE CELL FOR EVERY WORK ORDER</p>
+          <h1>
+            New part mix. Shifted fixture.<br /><span
+              >Same cell, no robot reprogramming.</span
+            >
+          </h1>
+          <p class="intro-copy">
+            Create a work order on the board. The cell plans the layout and measures the board position.
+            The robot places the parts. The cell checks each part before release.
+          </p>
+        </div>
+        <div class="intro-note">
+          <span class="small-label">ON THE SHOP FLOOR</span>
+          <ul class="challenge-list">
+            <li>
+              <strong>High-mix orders</strong><span>A new kit every shift</span>
+            </li>
+            <li>
+              <strong>Frequent changeovers</strong
+              ><span>No time to teach new robot paths</span>
+            </li>
+            <li>
+              <strong>Fixture drift</strong
+              ><span>Boards never sit exactly where planned</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel pipeline-panel">
+        <div class="panel-heading">
+          <h2>From work order to release</h2>
+          <span id="run-status" class="status-badge">Ready</span>
+        </div>
+        <div class="pipeline" aria-label="Assembly cell stages">
+          <div class="stage" data-stage="prepare_layout">
+            <span class="stage-number">1</span>
+            <div>
+              <strong>Plan</strong
+              ><small>The cell plans the part positions</small
+              ><span class="stage-status">Waiting</span>
+            </div>
+          </div>
+          <div class="stage" data-stage="calibrate_board">
+            <span class="stage-number">2</span>
+            <div>
+              <strong>Align</strong
+              ><small>The camera measures the board position</small
+              ><span class="stage-status">Waiting</span>
+            </div>
+          </div>
+          <div class="stage" data-stage="execute_cell">
+            <span class="stage-number">3</span>
+            <div>
+              <strong>Assemble &amp; inspect</strong
+              ><small>The cell places and checks each part</small
+              ><span class="stage-status">Waiting</span>
+            </div>
+          </div>
+          <div class="stage" data-stage="final">
+            <span class="stage-number">4</span>
+            <div>
+              <strong>Release</strong
+              ><small>Release, rework or reject the board</small
+              ><span class="stage-status">Waiting</span>
+            </div>
+          </div>
+        </div>
+        <div class="pipeline-footer">
+          <span id="progress-copy"
+            >The stages show the progress of this run.</span
+          ><button id="cancel" class="stop-button" hidden>Stop job</button>
+        </div>
+      </section>
+
+      <section id="shift-panel" class="panel shift-panel" hidden>
+        <div class="panel-heading">
+          <h2>Shift</h2>
+          <span id="shift-status" class="status-badge"></span>
+        </div>
+        <div class="table-scroll">
+          <table class="shift-table">
+            <thead>
+              <tr>
+                <th>WORK ORDER</th>
+                <th>STATUS</th>
+                <th>PARTS OK</th>
+                <th>ROBOT TIME</th>
+                <th>TOTAL TIME</th>
+                <th>MODEL TIME</th>
+                <th>MODEL REQUESTS</th>
+              </tr>
+            </thead>
+            <tbody id="shift-items"></tbody>
+          </table>
+        </div>
+        <div class="pipeline-footer">
+          <span id="shift-totals" role="status"></span
+          ><button id="cancel-shift" class="stop-button" hidden>
+            Stop shift
+          </button>
+        </div>
+      </section>
+
+      <div class="workbench">
+        <aside>
+          <section class="panel order-panel">
+            <div class="panel-heading">
+              <h2><span class="section-number">01</span> Work order</h2>
+              <span class="small-label">8 × 8 BOARD</span>
+            </div>
+            <form id="order-form">
+              <div class="mode-tabs" role="tablist" aria-label="Work order input">
+                <button
+                  type="button"
+                  role="tab"
+                  id="tab-board"
+                  class="mode-tab active"
+                  aria-selected="true"
+                  aria-controls="pane-board"
+                >
+                  Build on board</button
+                ><button
+                  type="button"
+                  role="tab"
+                  id="tab-kit"
+                  class="mode-tab"
+                  aria-selected="false"
+                  aria-controls="pane-kit"
+                >
+                  Kit list</button
+                ><button
+                  type="button"
+                  role="tab"
+                  id="tab-text"
+                  class="mode-tab"
+                  aria-selected="false"
+                  aria-controls="pane-text"
+                >
+                  Write as text
+                </button>
+              </div>
+
+              <div id="pane-board" role="tabpanel" aria-labelledby="tab-board">
+                <span class="field-label">Start from a shop-floor request</span>
+                <div
+                  class="scenarios"
+                  role="group"
+                  aria-label="Shop-floor requests"
+                >
+                  <button
+                    type="button"
+                    class="scenario"
+                    data-scenario="changeover"
+                  >
+                    <strong>Product changeover</strong
+                    ><small>A new six-part kit arrives mid-shift</small>
+                  </button>
+                  <button type="button" class="scenario" data-scenario="kitting">
+                    <strong>Kitting tray</strong
+                    ><small>Repeat parts in fixed pockets</small>
+                  </button>
+                  <button type="button" class="scenario" data-scenario="mixed">
+                    <strong>Mixed-part panel</strong
+                    ><small>Four part shapes on one board</small>
+                  </button>
+                  <button type="button" class="scenario" data-scenario="fixture">
+                    <strong>Shifted fixture</strong
+                    ><small>Board is off position on arrival</small>
+                  </button>
+                </div>
+                <button type="button" id="start-shift" class="shift-button">
+                  Run the four requests as one shift
+                </button>
+                <p class="editor-hint">
+                  The cell runs the four requests one after the other. Each
+                  request is a real job. The shift does not use the board
+                  below.
+                </p>
+
+                <span class="field-label" id="part-label">Part</span>
+                <div
+                  id="part-tools"
+                  class="tools"
+                  role="group"
+                  aria-labelledby="part-label"
+                ></div>
+                <span class="field-label" id="color-label">Color</span>
+                <div
+                  id="color-tools"
+                  class="tools"
+                  role="group"
+                  aria-labelledby="color-label"
+                ></div>
+                <div class="rotation-row">
+                  <span class="field-label">Rotation</span>
+                  <button type="button" id="rotate" class="chip-button">
+                    <span aria-hidden="true">⟳</span> Rotate ·
+                    <span id="rotation-value">0°</span>
+                  </button>
+                </div>
+
+                <div id="editor" class="editor" aria-label="Board editor"></div>
+                <div class="editor-footer">
+                  <span id="editor-count"></span>
+                  <span
+                    ><button type="button" id="undo" class="link-button">
+                      Undo</button
+                    ><button type="button" id="clear" class="link-button">
+                      Clear board
+                    </button></span
+                  >
+                </div>
+                <p id="editor-hint" class="editor-hint" role="status"></p>
+              </div>
+
+              <div
+                id="pane-kit"
+                role="tabpanel"
+                aria-labelledby="tab-kit"
+                hidden
+              >
+                <p class="editor-hint kit-lead">
+                  Enter the part quantities. Cosmos chooses the positions.
+                </p>
+                <span class="field-label" id="kit-items-label">Parts</span>
+                <div
+                  id="kit-items"
+                  class="kit-items"
+                  role="group"
+                  aria-labelledby="kit-items-label"
+                ></div>
+                <span class="field-label" id="kit-arrangement-label"
+                  >Arrangement</span
+                >
+                <div
+                  id="kit-arrangements"
+                  class="kit-arrangements"
+                  role="group"
+                  aria-labelledby="kit-arrangement-label"
+                ></div>
+                <div class="editor-footer"><span id="kit-count"></span></div>
+                <p class="editor-hint">
+                  The cell compares the part quantities with the plan. The cell
+                  does not check the arrangement.
+                </p>
+              </div>
+
+              <div
+                id="pane-text"
+                role="tabpanel"
+                aria-labelledby="tab-text"
+                hidden
+              >
+                <label for="goal">Work request</label>
+                <textarea
+                  id="goal"
+                  name="goal"
+                  maxlength="4000"
+                  rows="7"
+                  spellcheck="false"
+                  placeholder="Write the work order in plain language."
+                ></textarea>
+                <div class="input-footer">
+                  <button type="button" id="copy-instruction" class="link-button">
+                    Copy the order instruction</button
+                  ><span id="character-count"></span>
+                </div>
+                <div class="read-row">
+                  <button type="button" id="read-order" class="chip-button">
+                    Read the order</button
+                  ><span id="reading-note" role="status"></span>
+                </div>
+                <p class="editor-hint">
+                  Nemotron reads the order from the text. The cell writes the
+                  instruction from the order.
+                </p>
+                <label class="raw-option"
+                  ><input type="checkbox" id="send-raw" /><span
+                    >Send the text as written. The cell does not read an
+                    order.</span
+                  ></label
+                >
+              </div>
+
+              <fieldset id="fixture" class="fixture">
+                <legend>Fixture condition</legend>
+                <div class="fixture-presets">
+                  <button
+                    type="button"
+                    id="fixture-nominal"
+                    class="chip-button"
+                    aria-pressed="true"
+                  >
+                    In position</button
+                  ><button
+                    type="button"
+                    id="fixture-shifted"
+                    class="chip-button"
+                    aria-pressed="false"
+                  >
+                    Shifted
+                  </button>
+                </div>
+                <div class="fixture-body">
+                  <svg
+                    class="fixture-diagram"
+                    viewBox="-60 -60 120 120"
+                    role="img"
+                    aria-label="Planned and real board position"
+                  >
+                    <rect class="planned" x="-30" y="-30" width="60" height="60" />
+                    <g id="fixture-actual">
+                      <rect class="actual" x="-30" y="-30" width="60" height="60" />
+                      <circle class="actual-origin" cx="-24" cy="-24" r="2.5" />
+                    </g>
+                  </svg>
+                  <div class="sliders">
+                    <label class="slider"
+                      ><span>x</span
+                      ><input
+                        type="range"
+                        id="fixture-x"
+                        aria-label="Board offset x in millimeters" /><output
+                        id="fixture-x-value"
+                        for="fixture-x"
+                      ></output
+                    ></label>
+                    <label class="slider"
+                      ><span>y</span
+                      ><input
+                        type="range"
+                        id="fixture-y"
+                        aria-label="Board offset y in millimeters" /><output
+                        id="fixture-y-value"
+                        for="fixture-y"
+                      ></output
+                    ></label>
+                    <label class="slider"
+                      ><span>yaw</span
+                      ><input
+                        type="range"
+                        id="fixture-yaw"
+                        aria-label="Board rotation in degrees" /><output
+                        id="fixture-yaw-value"
+                        for="fixture-yaw"
+                      ></output
+                    ></label>
+                  </div>
+                </div>
+                <p class="editor-hint">
+                  Cosmos does not receive these values. The camera must measure the
+                  board position. The dashed line shows the planned position.
+                  The solid line shows the actual offset at 5× scale.
+                </p>
+              </fieldset>
+
+              <fieldset id="supply" class="supply">
+                <legend>Part supply</legend>
+                <div class="supply-choices">
+                  <button
+                    type="button"
+                    class="chip-button"
+                    data-supply="none"
+                    aria-pressed="true"
+                  >
+                    No fault</button
+                  ><button
+                    type="button"
+                    class="chip-button"
+                    data-supply="missing"
+                    aria-pressed="false"
+                  >
+                    Missing part</button
+                  ><button
+                    type="button"
+                    class="chip-button"
+                    data-supply="wrong_color"
+                    aria-pressed="false"
+                  >
+                    Wrong color
+                  </button>
+                </div>
+                <p id="supply-hint" class="editor-hint" role="status"></p>
+              </fieldset>
+
+              <div id="instruction-box" class="instruction-box">
+                <span class="small-label">INSTRUCTION SENT TO THE CELL</span>
+                <p id="instruction" class="instruction" aria-live="polite"></p>
+              </div>
+
+              <button id="start" class="primary-button" type="submit">
+                <span>Send to cell</span><span aria-hidden="true">→</span>
+              </button>
+              <p class="run-note">
+                Starts the model requests and the simulation.<br />A job can take
+                several minutes.
+              </p>
+              <p id="form-error" class="error-message" role="alert" hidden></p>
+            </form>
+          </section>
+          <section class="panel history-panel">
+            <div class="panel-heading">
+              <h2><span class="section-number">02</span> Recent jobs</h2>
+              <button
+                id="refresh-history"
+                class="text-button"
+                aria-label="Refresh recent jobs"
+              >
+                ↻
+              </button>
+            </div>
+            <div id="history">
+              <p class="empty-copy">
+                No jobs yet. Send a work order to the cell.
+              </p>
+            </div>
+          </section>
+        </aside>
+
+        <div class="main-column">
+          <section class="panel viewer-panel">
+            <div class="viewer-header">
+              <div>
+                <span class="eyebrow">CELL CAMERA</span>
+                <h2>Watch the cell work.</h2>
+              </div>
+              <div class="view-tabs" role="group" aria-label="Viewer source">
+                <button id="live-tab" class="view-tab">This job</button
+                ><button id="reference-tab" class="view-tab active">
+                  Reference run
+                </button>
+              </div>
+            </div>
+            <div class="visual-grid">
+              <div class="video-area">
+                <div class="video-topline">
+                  <span id="media-label">REFERENCE RUN · SHIFTED FIXTURE</span
+                  ><span id="elapsed">SO-101 ARM</span>
+                </div>
+                <video
+                  id="video"
+                  controls
+                  playsinline
+                  preload="metadata"
+                  aria-label="Isaac Sim assembly cell video"
+                ></video>
+                <img
+                  id="observation"
+                  class="observation"
+                  alt="Current job target or board observation"
+                  hidden
+                />
+                <div id="video-empty" class="video-empty">
+                  <div class="empty-board" aria-hidden="true">▦</div>
+                  <strong>The cell view appears here.</strong
+                  ><span>The recording is available when the job ends.</span>
+                </div>
+                <div class="video-caption">
+                  <span id="video-caption"
+                    >An original Isaac Sim recording.</span
+                  ><span class="video-caption-mark">SIMULATION</span>
+                </div>
+              </div>
+              <div class="board-area">
+                <div class="board-heading">
+                  <span class="small-label">TARGET LAYOUT</span
+                  ><span id="board-size">8 × 8</span>
+                </div>
+                <canvas
+                  id="board"
+                  width="384"
+                  height="384"
+                  aria-label="Target part layout"
+                ></canvas>
+                <p id="board-caption">The planned layout appears here.</p>
+                <div class="part-key">
+                  <span><i class="blue"></i>Square</span
+                  ><span><i class="gray"></i>Rectangle</span
+                  ><span><i class="orange"></i>L part</span
+                  ><span><i class="white"></i>T part</span>
+                </div>
+              </div>
+            </div>
+            <div id="recording-controls" class="reference-controls" hidden>
+              <span>This job has two recordings</span>
+              <div class="variant-buttons">
+                <button id="first-recording" class="active">First run</button
+                ><button id="rework-recording">Rework run</button>
+              </div>
+            </div>
+            <div id="reference-controls" class="reference-controls">
+              <span>Reference run: one 16-part panel on a shifted fixture</span>
+              <div class="variant-buttons">
+                <button id="before-reference">Without alignment</button
+                ><button id="after-reference" class="active">
+                  With alignment
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel results-panel">
+            <div class="results-top">
+              <div>
+                <p class="eyebrow">QUALITY INSPECTION</p>
+                <h2 id="result-title">
+                  The cell checks every part before release.
+                </h2>
+              </div>
+              <div class="metric">
+                <strong id="passed-count">—</strong><span>PARTS OK</span>
+              </div>
+            </div>
+            <p id="result-description">
+              Each part must sit within tolerance for position, angle, tilt and
+              seating height.
+            </p>
+            <div
+              id="disposition"
+              class="disposition"
+              role="status"
+              hidden
+            ></div>
+            <div id="run-error" class="run-error" role="status" hidden></div>
+            <div id="order-match" class="order-match" role="status" hidden></div>
+            <div
+              id="camera-check"
+              class="camera-check"
+              role="status"
+              hidden
+            ></div>
+            <p id="first-inspection" class="first-inspection" hidden></p>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>PART</th>
+                    <th>TYPE</th>
+                    <th>POSITION DEVIATION</th>
+                    <th>ANGLE DEVIATION</th>
+                    <th>RESULT</th>
+                  </tr>
+                </thead>
+                <tbody id="parts">
+                  <tr>
+                    <td colspan="5" class="empty-table">
+                      Inspection results appear after assembly.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <details class="decisions">
+              <summary>
+                Run details
+                <span id="decision-count"></span>
+              </summary>
+              <div class="model-stack">
+                <span class="small-label">COMPONENTS</span>
+                <p>
+                  Nemotron coordinates <span>→</span> Cosmos plans the layout
+                  <span>→</span> Isaac Sim runs the SO-101 cell
+                </p>
+              </div>
+              <span class="small-label">NEMOTRON DECISIONS</span>
+              <div id="decisions">
+                <p class="empty-copy">
+                  Send a work order to see the recorded model decisions.
+                </p>
+              </div>
+            </details>
+          </section>
+        </div>
+      </div>
+      <footer>
+        <span
+          >pixel2place · Plain-language work orders to inspected
+          assemblies.</span
+        ><span
+          >Simulated cell in Isaac Sim · Reference runs and new jobs are shown
+          separately.</span
+        >
+      </footer>
+    </main>
+  </body>
+</html>

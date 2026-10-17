@@ -1,0 +1,24 @@
+[project]
+name = "pixel2place-learning"
+version = "0.1.0"
+description = "LeRobot training environment for the pixel2place slot task."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "lerobot[training,groot]==0.6.1",
+    "pixel2place",
+    "torch==2.11.0",
+    "torchvision",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+pixel2place = { path = "../..", editable = true }
+torch = { index = "pytorch-cu130" }
+torchvision = { index = "pytorch-cu130" }
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true

@@ -1,0 +1,95 @@
+{
+  "project_version": "0.1",
+  "board": {
+    "type": "grid",
+    "rows": 8,
+    "cols": 8,
+    "cell_size_mm": 20.0
+  },
+  "palette": [
+    "blue",
+    "gray",
+    "orange",
+    "white"
+  ],
+  "parts": [
+    {
+      "part_id": "P001",
+      "type": "square_tile",
+      "color": "blue",
+      "cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P002",
+      "type": "rect_tile",
+      "color": "gray",
+      "cells": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P003",
+      "type": "L_tile",
+      "color": "white",
+      "cells": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P004",
+      "type": "T_tile",
+      "color": "orange",
+      "cells": [
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "rotation_deg": 90
+    }
+  ],
+  "feasible": true,
+  "notes": []
+}

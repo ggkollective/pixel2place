@@ -1,0 +1,170 @@
+{
+  "image_size": [
+    640,
+    480
+  ],
+  "limits": {
+    "coverage": 0.95,
+    "color_distance": 20.0,
+    "shadow_distance": 25.0,
+    "pin_ratio": 1.9
+  },
+  "parts": [
+    {
+      "sequence": 1,
+      "part_id": "P001",
+      "type": "T_tile",
+      "color": "gray",
+      "cells": [
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ]
+      ],
+      "coverage": 1.0,
+      "shadow_coverage": 1.0,
+      "pins_hidden": true,
+      "empty": false,
+      "status": "match"
+    },
+    {
+      "sequence": 2,
+      "part_id": "P005",
+      "type": "square_tile",
+      "color": "gray",
+      "cells": [
+        [
+          4,
+          7
+        ]
+      ],
+      "coverage": 1.0,
+      "shadow_coverage": 1.0,
+      "pins_hidden": true,
+      "empty": false,
+      "status": "match"
+    },
+    {
+      "sequence": 3,
+      "part_id": "P004",
+      "type": "rect_tile",
+      "color": "gray",
+      "cells": [
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ]
+      ],
+      "coverage": 1.0,
+      "shadow_coverage": 1.0,
+      "pins_hidden": true,
+      "empty": false,
+      "status": "match"
+    },
+    {
+      "sequence": 4,
+      "part_id": "P006",
+      "type": "square_tile",
+      "color": "white",
+      "cells": [
+        [
+          3,
+          4
+        ]
+      ],
+      "coverage": 1.0,
+      "shadow_coverage": 1.0,
+      "pins_hidden": true,
+      "empty": false,
+      "status": "match"
+    },
+    {
+      "sequence": 5,
+      "part_id": "P007",
+      "type": "rect_tile",
+      "color": "gray",
+      "cells": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "coverage": 1.0,
+      "shadow_coverage": 1.0,
+      "pins_hidden": true,
+      "empty": false,
+      "status": "match"
+    },
+    {
+      "sequence": 6,
+      "part_id": "P003",
+      "type": "L_tile",
+      "color": "white",
+      "cells": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "coverage": 1.0,
+      "shadow_coverage": 1.0,
+      "pins_hidden": true,
+      "empty": false,
+      "status": "match"
+    },
+    {
+      "sequence": 7,
+      "part_id": "P002",
+      "type": "square_tile",
+      "color": "orange",
+      "cells": [
+        [
+          0,
+          7
+        ]
+      ],
+      "coverage": 0.0,
+      "shadow_coverage": 1.0,
+      "pins_hidden": true,
+      "empty": false,
+      "status": "shadowed"
+    }
+  ],
+  "unexpected_cells": [],
+  "match_count": 6,
+  "shadowed_count": 1,
+  "mismatch_count": 0,
+  "passed": true
+}

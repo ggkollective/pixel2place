@@ -1,0 +1,21 @@
+{
+  "board": {
+    "board_origin": [
+      0.11679238444385756,
+      -0.0743327343715732
+    ],
+    "row_direction": [
+      0.9999376357589274,
+      -0.011168016513540966
+    ],
+    "col_direction": [
+      0.011168016513540966,
+      0.9999376357589274
+    ],
+    "board_yaw": 1.5596280781139393
+  },
+  "camera": null,
+  "joint_error": null,
+  "faults": null,
+  "preplaced": null
+}

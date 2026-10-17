@@ -1,0 +1,23 @@
+# 배치 계획 모델 입력 예시 지시문 라이브러리.
+# mode A: 지시문만 사용한다. mode B: 지시문에 스타일 제약을 붙인다.
+prompts:
+  - id: tray_symmetric
+    mode: A
+    text: >-
+      A top-down industrial tray layout with blue, gray, and white components
+      arranged in a symmetric pattern.
+  - id: clean_panel
+    mode: A
+    text: >-
+      A clean top-view assembly board with simple industrial part silhouettes
+      and minimal visual clutter.
+  - id: repetitive_panel
+    mode: A
+    text: >-
+      A 2D panel layout with repetitive industrial components, high contrast,
+      top-down view.
+  - id: kitting_tray_constrained
+    mode: B
+    text: >-
+      A kitting tray for one assembly kit. Use two L tiles, two T tiles, and four square tiles.
+      Use a limited palette. Keep one empty cell between all parts.

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "run_id": "32e981b6558f448e97fd52d492dddaf9",
+  "tool_call_id": "call-2",
+  "artifacts": [
+    {
+      "id": "158a132626fd46a3a95339a614dd27a8",
+      "kind": "calibration"
+    }
+  ],
+  "status": "ok",
+  "error_code": null,
+  "recoverable": false,
+  "summary": {
+    "markers_found": 6,
+    "markers_total": 6,
+    "pins_used": 64,
+    "pins_total": 64,
+    "marker_max_residual_px": 0.017757977345529915,
+    "pin_rms_mm": 0.1005851976302134,
+    "pin_max_mm": 0.19316554053431467,
+    "board_shift_mm": 0.03147922087032236,
+    "board_dx_mm": -0.0011598269617869514,
+    "board_dy_mm": -0.029912229211559234,
+    "board_yaw_deg": -0.0011933642018248309
+  }
+}

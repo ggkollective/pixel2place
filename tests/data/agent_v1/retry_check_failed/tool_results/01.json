@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "run_id": "e1155f4bc4ff4dd2aafea1f09b3e5212",
+  "tool_call_id": "call-1",
+  "artifacts": [],
+  "status": "error",
+  "error_code": "layout_invalid",
+  "recoverable": true,
+  "summary": {
+    "tool": "prepare_layout",
+    "layout_attempt": 1,
+    "violations": [],
+    "cell_accuracy": null
+  }
+}

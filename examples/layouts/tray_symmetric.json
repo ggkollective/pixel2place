@@ -1,0 +1,130 @@
+{
+  "project_version": "0.1",
+  "board": {
+    "type": "grid",
+    "rows": 8,
+    "cols": 8,
+    "cell_size_mm": 20.0
+  },
+  "palette": [
+    "blue",
+    "gray",
+    "white"
+  ],
+  "parts": [
+    {
+      "part_id": "P001",
+      "type": "square_tile",
+      "color": "blue",
+      "cells": [
+        [
+          1,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P002",
+      "type": "square_tile",
+      "color": "gray",
+      "cells": [
+        [
+          1,
+          6
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P003",
+      "type": "square_tile",
+      "color": "white",
+      "cells": [
+        [
+          6,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P004",
+      "type": "square_tile",
+      "color": "blue",
+      "cells": [
+        [
+          6,
+          6
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P005",
+      "type": "rect_tile",
+      "color": "gray",
+      "cells": [
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P006",
+      "type": "L_tile",
+      "color": "blue",
+      "cells": [
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "rotation_deg": 90
+    },
+    {
+      "part_id": "P007",
+      "type": "L_tile",
+      "color": "gray",
+      "cells": [
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "rotation_deg": 270
+    }
+  ],
+  "feasible": true,
+  "notes": []
+}

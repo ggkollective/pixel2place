@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "run_id": "32e981b6558f448e97fd52d492dddaf9",
+  "state": "completed",
+  "layout_attempts": 1,
+  "capture_consumed": true,
+  "place_consumed": true,
+  "in_flight": null,
+  "call_ids": [
+    "call-1",
+    "call-2",
+    "call-3"
+  ],
+  "result_count": 3,
+  "layout_id": "82aa535df86f4095a70897c9bbe922e1",
+  "calibration_id": "158a132626fd46a3a95339a614dd27a8",
+  "check_id": "109b241e8ff34a25aec53dbf9e60b6a8",
+  "check_passed": true,
+  "error_code": null
+}

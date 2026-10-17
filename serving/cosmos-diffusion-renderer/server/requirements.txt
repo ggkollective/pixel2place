@@ -1,0 +1,4 @@
+# HTTP 서버 의존성.
+fastapi==0.141.1
+python-multipart==0.0.32
+uvicorn==0.54.0

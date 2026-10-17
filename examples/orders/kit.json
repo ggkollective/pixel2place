@@ -1,0 +1,8 @@
+{
+  "kind": "kit",
+  "items": [
+    {"type": "square_tile", "count": 4},
+    {"type": "rect_tile", "count": 2}
+  ],
+  "arrangement": "type_rows"
+}

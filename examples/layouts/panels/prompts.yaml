@@ -1,0 +1,44 @@
+# bench-cell 패널 레이아웃의 배치 계획 모델 지시문.
+# 부품이 서로 맞닿는 조밀한 패널을 요청한다. 레이아웃 파일 이름은 id와 같다.
+prompts:
+  - id: dense_mixed
+    text: >-
+      A dense assembly panel of about 18 parts. Use L, T, rectangle, and square tiles.
+      Fill at least 56 of the 64 cells. Put the parts side by side with no empty cells between them.
+  - id: t_l_rows
+    text: >-
+      A top-down panel with rows of T tiles and L tiles. The tiles in a row touch each other.
+      Use all four rotations. Leave few empty cells.
+  - id: interlock
+    text: >-
+      An interlocking panel of 12 L tiles and T tiles. Fit the tiles together like a puzzle.
+      Fill rows 0 to 5 with no empty cells between the tiles.
+  - id: brick
+    text: >-
+      A brick wall panel. Fill every cell of the board with rectangle tiles and square tiles.
+      Each row has no empty cells. Shift the tiles in each row by one cell from the row above.
+  - id: pockets
+    text: >-
+      A panel of T tiles and L tiles around small pockets. Put one square tile in each pocket.
+      The square tiles touch the tiles around them.
+  - id: center_block
+    text: >-
+      A compact kitting panel of 12 to 16 parts in the center of the board.
+      Fill rows 1 to 6 and columns 1 to 6 with no empty cells.
+  - id: rotated_pack
+    text: >-
+      A dense industrial panel of about 14 parts. Use L tiles and T tiles at 90 and 270 degrees,
+      rectangle tiles at 90 degrees, and square tiles in the gaps.
+      Fill at least 48 cells with no empty cells between the parts.
+  - id: two_zones
+    text: >-
+      Two dense zones of parts. The left half has blue parts. The right half has gray parts.
+      The parts in each zone touch each other.
+  - id: frame_core
+    text: >-
+      A frame of rectangle tiles and L tiles along the edge of the board.
+      A dense block of T tiles and square tiles fills the center.
+  - id: clusters
+    text: >-
+      Four clusters in a 2 by 2 grid. Each cluster is one T tile, one L tile, and one square tile.
+      The parts in a cluster touch. The clusters touch each other with no empty cells between them.

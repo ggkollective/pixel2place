@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "run_id": "32e981b6558f448e97fd52d492dddaf9",
+  "tool_call_id": "call-3",
+  "artifacts": [
+    {
+      "id": "109b241e8ff34a25aec53dbf9e60b6a8",
+      "kind": "check"
+    }
+  ],
+  "status": "ok",
+  "error_code": null,
+  "recoverable": false,
+  "summary": {
+    "part_count": 4,
+    "passed_count": 4,
+    "passed": true,
+    "failed_parts": []
+  }
+}

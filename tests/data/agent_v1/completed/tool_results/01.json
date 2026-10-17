@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "run_id": "32e981b6558f448e97fd52d492dddaf9",
+  "tool_call_id": "call-1",
+  "artifacts": [
+    {
+      "id": "82aa535df86f4095a70897c9bbe922e1",
+      "kind": "layout"
+    }
+  ],
+  "status": "ok",
+  "error_code": null,
+  "recoverable": false,
+  "summary": {
+    "part_count": 4,
+    "planned_part_count": 4,
+    "plan_feasible": true,
+    "parsed_feasible": true,
+    "repair_count": 0,
+    "cell_accuracy": 1.0
+  }
+}

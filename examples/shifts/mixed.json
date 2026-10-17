@@ -1,0 +1,12 @@
+{
+  "items": [
+    {"name": "changeover", "order": "../orders/changeover.json"},
+    {"name": "kitting", "order": "../orders/kitting.json"},
+    {"name": "mixed", "order": "../orders/mixed.json"},
+    {
+      "name": "fixture",
+      "order": "../orders/changeover.json",
+      "fixture": {"x_mm": 3.0, "y_mm": 5.0, "yaw_deg": 1.5}
+    }
+  ]
+}

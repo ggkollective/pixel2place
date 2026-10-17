@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "run_id": "e1155f4bc4ff4dd2aafea1f09b3e5212",
+  "tool_call_id": "call-4",
+  "artifacts": [
+    {
+      "id": "a904d601bc46436ea811ef3be3bc0173",
+      "kind": "check"
+    }
+  ],
+  "status": "ok",
+  "error_code": null,
+  "recoverable": false,
+  "summary": {
+    "part_count": 4,
+    "passed_count": 3,
+    "passed": false,
+    "failed_parts": [
+      {
+        "part_id": "P004",
+        "failures": [
+          "position"
+        ],
+        "failed_stage": "place"
+      }
+    ]
+  }
+}

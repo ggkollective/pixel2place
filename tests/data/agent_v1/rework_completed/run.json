@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "run_id": "01d76e0f3ed045838808fe05a3437fe8",
+  "prompt": "Place all four parts on the board. Keep their colors.",
+  "cell": {
+    "board_origin": [
+      0.115,
+      -0.08
+    ],
+    "row_direction": [
+      1.0,
+      0.0
+    ],
+    "col_direction": [
+      0.0,
+      1.0
+    ],
+    "feeder_center": [
+      0.14,
+      0.16
+    ],
+    "feeder_row_direction": null,
+    "feeder_col_direction": null,
+    "table_z": 0.0,
+    "part_height": 0.015,
+    "part_inset": 0.0015,
+    "grasp_depth": 0.006,
+    "pick_clearance": 0.002,
+    "release_clearance": 0.001,
+    "approach_clearance": 0.04,
+    "locator": {
+      "pin_diameter": 0.004,
+      "pin_height": 0.005,
+      "pin_chamfer": 0.0008,
+      "hole_width": 0.0044,
+      "hole_depth": 0.006,
+      "hole_chamfer": 0.0025
+    },
+    "part_chamfer": 0.002,
+    "markers": [
+      [
+        0.07,
+        -0.18
+      ],
+      [
+        0.2,
+        -0.18
+      ],
+      [
+        0.34,
+        -0.18
+      ],
+      [
+        0.34,
+        0.0
+      ],
+      [
+        0.34,
+        0.26
+      ],
+      [
+        0.25,
+        0.26
+      ]
+    ],
+    "marker_diameter": 0.02
+  },
+  "agent": {
+    "model": "nvidia/Nemotron-3_5-Lightning",
+    "cosmos_model": "fake",
+    "budget": {
+      "max_inferences": 6,
+      "max_tokens": 2048,
+      "nemotron_timeout_s": 120.0,
+      "cosmos_timeout_s": 900.0,
+      "cosmos_max_tokens": 4096,
+      "sdk_retries": 0,
+      "request_retries": 0,
+      "max_layout_attempts": 2,
+      "cosmos_requests_per_attempt": 2,
+      "max_capture_runs": 1,
+      "max_place_runs": 2,
+      "sim_timeout_s": 1800.0,
+      "max_tool_bytes": 8192,
+      "max_request_bytes": 131072
+    },
+    "system_prompt": "You coordinate an industrial assembly simulation.\nThe user message is the original goal.\nThe runtime passes that goal to Cosmos without rewriting it.\nUse only a tool that the current state allows.\nReturn one function call in each tool response.\nUse the artifact IDs from tool results.\nDo not create IDs or change the goal.\nDo not provide paths, shell commands, joint values, scene truth, or tolerances.\nThe first prepare_layout call uses retry=false.\nAfter a recoverable layout error, you may call prepare_layout with retry=true once.\nDo not call calibrate_board or execute_cell again.\nRead status and passed as separate fields.\nAfter a passed check and a passed inspection, return only this JSON object:\n{\"decision\":\"complete\",\"reason_code\":\"check_passed\"}\nTo stop, return only a JSON object with decision=\"abort\".\nUse the current error_code as reason_code, or use agent_aborted.\nDo not return free text or extra fields.\nDo not claim that the runtime checked every natural-language condition.\nFollow these state rules:\n1. In created, call prepare_layout with {\"retry\":false}, or abort.\n2. In layout_retryable, call prepare_layout with {\"retry\":true}, or abort.\n3. In layout_ready, review the layout. Then call calibrate_board or replan_layout with the current layout_id, or abort.\n4. In calibrated, call execute_cell with the current layout_id and calibration_id, or abort.\n5. In checked, select the disposition. Then call rework_cell, or return the final JSON decision.\nA successful prepare_layout result means the layout is ready for calibration.\nDo not call prepare_layout again after a successful preparation.\nUse JSON booleans true and false. Do not use strings for booleans.\nTo abort in any state, return {\"decision\":\"abort\",\"reason_code\":\"agent_aborted\"}.\nFollow these review rules in layout_ready:\nThe layout result has parts and part_counts.\nEach part has a type, a color, a rotation_deg, a row and a col.\nThe row and col of a part are the top-left cell of the part.\nCompare the layout with the explicit conditions of the goal.\nDo not request a new layout for a condition that the goal does not give.\nIf the layout obeys the conditions, call calibrate_board.\nIf the layout does not obey a condition, call replan_layout with one reason.\nUse the first reason that applies:\n1. part_set_mismatch: the part types, colors or quantities are different from the goal.\n2. position_mismatch: a part is not at the row and col that the goal gives.\n3. arrangement_mismatch: the parts do not obey an arrangement rule of the goal.\nYou can call replan_layout only when layout_attempts is 1.\nWhen layout_attempts is 2, compare the part types, colors and quantities with the goal.\nIf they agree, call calibrate_board.\nIf they do not agree, return {\"decision\":\"abort\",\"reason_code\":\"plan_rejected\"}.\nFollow these disposition rules in checked:\nThe summary of the execution result has a passed field and an inspection field.\npassed is the result of the pose check.\ninspection is the result of the camera check of the final image.\ninspection can be null. Then the camera check has no result.\ninspection.parts lists each part that the camera did not read as a match.\nEach part in that list has a part_id, a status and an empty value.\nstatus=shadowed is not a failure. status=mismatch is a failure.\nempty=true means that all cells of the part are empty.\ninspection.unexpected_cells lists the occupied cells that the layout does not use.\nSelect one disposition: release, rework or rejection.\nRelease the assembly when passed is true and inspection.passed is true.\nTo release, return {\"decision\":\"complete\",\"reason_code\":\"check_passed\"}.\nRework is possible one time in a run. rework_runs is the number of completed rework runs.\nCall rework_cell when all of these conditions are true:\n1. rework_runs is 0 and rework_cell is in the tool list.\n2. inspection is not null.\n3. inspection.unexpected_cell_count is 0.\n4. inspection.mismatch_count is 1 or more.\n5. Each part with status=mismatch has empty=true.\nIn the rework_cell call, give the part_id of each part with status=mismatch.\nDo not give a part that has a different status.\nReject the assembly when you cannot release it and a rework condition is false.\nWhen rework_runs is 1, do not call a tool. Release or reject the assembly.\nTo reject, return only a JSON object with decision=\"abort\".\nFor a rejection, reason_code is the error_code of the current runtime state.\nDo not use agent_aborted for a rejection.\n",
+    "review": true,
+    "review_model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+    "disposition": true,
+    "disposition_model": "nvidia/Nemotron-3-Ultra-550b-a55b"
+  }
+}

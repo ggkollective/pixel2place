@@ -1,0 +1,23 @@
+SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+SPDX-License-Identifier: Apache-2.0
+
+pixel2place changes: Read model checkpoints with memory mapping.
+
+diff --git a/cosmos_predict1/diffusion/inference/inference_utils.py b/cosmos_predict1/diffusion/inference/inference_utils.py
+index 3474140..5205059 100644
+--- a/cosmos_predict1/diffusion/inference/inference_utils.py
++++ b/cosmos_predict1/diffusion/inference/inference_utils.py
+@@ -323,10 +323,11 @@ def load_network_model(model: DiffusionT2WModel, ckpt_path: str):
+     with skip_init_linear():
+         model.set_up_model()
+     try:
+-        net_state_dict = torch.load(ckpt_path, map_location="cpu", weights_only=True)
++        # 체크포인트를 파일 매핑으로 읽는다. fp32 체크포인트 전체를 메모리에 복사하지 않는다.
++        net_state_dict = torch.load(ckpt_path, map_location="cpu", weights_only=True, mmap=True)
+     except Exception:
+         # Posttrained models can be loaded with weights_only=False
+-        net_state_dict = torch.load(ckpt_path, map_location="cpu", weights_only=False)
++        net_state_dict = torch.load(ckpt_path, map_location="cpu", weights_only=False, mmap=True)
+     if "model" in net_state_dict:
+         model_state_dict = net_state_dict["model"]
+         if "ema" in net_state_dict and model.config.peft_control and model.config.peft_control.enabled:

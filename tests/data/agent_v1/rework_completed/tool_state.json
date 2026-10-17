@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "run_id": "01d76e0f3ed045838808fe05a3437fe8",
+  "state": "completed",
+  "layout_attempts": 1,
+  "capture_consumed": true,
+  "place_consumed": true,
+  "in_flight": null,
+  "call_ids": [
+    "call-1",
+    "call-2",
+    "call-3",
+    "call-4"
+  ],
+  "result_count": 4,
+  "layout_id": "40f45cdf711a47e0b53231bd0a69500d",
+  "calibration_id": "df23fb8da86541dab2e8b838e4d1b5ae",
+  "check_id": "ad783faf47cc498a82d9457d30e4c054",
+  "check_passed": true,
+  "error_code": null,
+  "rework_consumed": true,
+  "image_check_id": "4670b12ea41b4dde8f6ecfe8d83c9428",
+  "image_check_passed": true,
+  "rework_targets": []
+}

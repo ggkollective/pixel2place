@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "run_id": "e1155f4bc4ff4dd2aafea1f09b3e5212",
+  "state": "aborted",
+  "error_code": "check_failed",
+  "calls": {
+    "catalog": 1,
+    "nemotron": 5,
+    "cosmos": 3,
+    "capture": 1,
+    "place": 1,
+    "request_bytes": 18340
+  },
+  "final_decision": {
+    "decision": "abort",
+    "reason_code": "check_failed"
+  },
+  "check_id": "a904d601bc46436ea811ef3be3bc0173",
+  "check_passed": false
+}

@@ -1,0 +1,265 @@
+{
+  "project_version": "0.1",
+  "board": {
+    "type": "grid",
+    "rows": 8,
+    "cols": 8,
+    "cell_size_mm": 20.0
+  },
+  "palette": [
+    "blue",
+    "gray",
+    "orange",
+    "white"
+  ],
+  "parts": [
+    {
+      "part_id": "P001",
+      "type": "T_tile",
+      "color": "blue",
+      "cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P002",
+      "type": "L_tile",
+      "color": "blue",
+      "cells": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P003",
+      "type": "square_tile",
+      "color": "blue",
+      "cells": [
+        [
+          2,
+          1
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P004",
+      "type": "T_tile",
+      "color": "gray",
+      "cells": [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "rotation_deg": 90
+    },
+    {
+      "part_id": "P005",
+      "type": "L_tile",
+      "color": "gray",
+      "cells": [
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "rotation_deg": 90
+    },
+    {
+      "part_id": "P006",
+      "type": "square_tile",
+      "color": "gray",
+      "cells": [
+        [
+          2,
+          4
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P007",
+      "type": "T_tile",
+      "color": "white",
+      "cells": [
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ]
+      ],
+      "rotation_deg": 180
+    },
+    {
+      "part_id": "P008",
+      "type": "L_tile",
+      "color": "white",
+      "cells": [
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "rotation_deg": 180
+    },
+    {
+      "part_id": "P009",
+      "type": "square_tile",
+      "color": "white",
+      "cells": [
+        [
+          2,
+          6
+        ]
+      ],
+      "rotation_deg": 0
+    },
+    {
+      "part_id": "P010",
+      "type": "T_tile",
+      "color": "orange",
+      "cells": [
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          2
+        ]
+      ],
+      "rotation_deg": 270
+    },
+    {
+      "part_id": "P011",
+      "type": "L_tile",
+      "color": "orange",
+      "cells": [
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ]
+      ],
+      "rotation_deg": 270
+    },
+    {
+      "part_id": "P012",
+      "type": "square_tile",
+      "color": "orange",
+      "cells": [
+        [
+          2,
+          2
+        ]
+      ],
+      "rotation_deg": 0
+    }
+  ],
+  "feasible": true,
+  "notes": [
+    "MOVED: Moved part P003 from [2, 0] to [2, 1].",
+    "MOVED: Moved part P005 from [1, 4] to [3, 4].",
+    "MOVED: Moved part P007 from [0, 6] to [4, 5].",
+    "MOVED: Moved part P010 from [0, 2] to [3, 2].",
+    "MOVED: Moved part P011 from [1, 2] to [5, 2]."
+  ]
+}

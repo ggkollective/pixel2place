@@ -1,0 +1,11 @@
+{
+  "kind": "board",
+  "parts": [
+    {"type": "square_tile", "color": "blue", "row": 1, "col": 1},
+    {"type": "square_tile", "color": "blue", "row": 1, "col": 6},
+    {"type": "square_tile", "color": "blue", "row": 6, "col": 1},
+    {"type": "square_tile", "color": "blue", "row": 6, "col": 6},
+    {"type": "rect_tile", "color": "gray", "row": 3, "col": 3},
+    {"type": "rect_tile", "color": "gray", "row": 4, "col": 3}
+  ]
+}

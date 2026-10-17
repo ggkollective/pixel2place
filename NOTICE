@@ -1,0 +1,172 @@
+pixel2place
+Copyright 2026 Gigone Lee
+
+This product is licensed under the Apache License, Version 2.0.
+The LICENSE file contains the full text of the license.
+
+========================================================================
+1. Third-party material in this repository
+========================================================================
+
+This repository contains material from two third-party projects.
+
+SO-ARM100
+  Source:  https://github.com/TheRobotStudio/SO-ARM100
+  Commit:  5f6d2b876a53a4872e405b991dd925556c9e38a4
+  License: Apache License 2.0
+  Use:     src/pixel2place/robot/so101.py contains the joint origins and
+           the joint limits from Simulation/SO101/so101_new_calib.urdf.
+
+Cosmos-Transfer1-DiffusionRenderer
+  Source:  https://github.com/nv-tlabs/cosmos-transfer1-diffusion-renderer
+  Commit:  0f3e2dc435032ecbad654c2fc2153df85384b138
+  License: Apache License 2.0
+  Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+  Use:     serving/cosmos-diffusion-renderer/patches/ contains two patch
+           files. The patch files change source files of
+           Cosmos-Transfer1-DiffusionRenderer. The patch files contain
+           lines from those source files.
+
+========================================================================
+2. Third-party components that this repository does not contain
+========================================================================
+
+This repository does not contain the components in this section.
+The scripts and the Dockerfiles download them at build time or at run
+time. Each component has its own license. You must obey the license of
+each component that you use.
+
+2.1 Software
+
+nvdiffrast
+  Source:  https://github.com/NVlabs/nvdiffrast
+  Commit:  253ac4fcea7de5f396371124af597e6cc957bfae
+  License: Nvidia Source Code License (1-Way Commercial)
+  Use:     serving/cosmos-diffusion-renderer/Dockerfile installs it in
+           the image of the relighting server.
+  NOTE:    This license permits non-commercial use only. The license
+           defines non-commercial use as research or evaluation.
+           Only the relighting server uses nvdiffrast. The relighting
+           server is an optional component. The code in src/, sim/ and
+           tests/ does not call the relighting server.
+
+Cosmos-Transfer1-DiffusionRenderer
+  Source:  https://github.com/nv-tlabs/cosmos-transfer1-diffusion-renderer
+  Commit:  0f3e2dc435032ecbad654c2fc2153df85384b138
+  License: Apache License 2.0
+  Use:     serving/cosmos-diffusion-renderer/Dockerfile downloads the
+           source code into the image of the relighting server.
+
+vLLM
+  Source:  https://github.com/vllm-project/vllm
+  Commit:  598d51153a15ff4a803037dade1c4ea43d1ea9bc
+  License: Apache License 2.0
+  Use:     serving/cosmos-reasoner/Dockerfile installs it in the image
+           of the reasoner server.
+
+NVIDIA cosmos-framework (package vllm-cosmos3)
+  Source:  https://github.com/NVIDIA/cosmos-framework
+  Commit:  dff6966446f2325f69e9a65c396908019b721df1
+  License: OpenMDW License Agreement, version 1.1 (OpenMDW-1.1)
+  Use:     serving/cosmos-reasoner/Dockerfile installs it in the image
+           of the reasoner server.
+
+vLLM-Omni container image
+  Source:  https://github.com/vllm-project/vllm-omni
+  Image:   vllm/vllm-omni. serving/cosmos-generator/config.env contains
+           the image digest.
+  License: Apache License 2.0
+  Use:     The generator server runs this image.
+
+NVIDIA PyTorch container
+  Image:   nvcr.io/nvidia/pytorch:25.09-py3
+  License: NVIDIA Software License Agreement and Product-Specific Terms
+           for AI Products
+  Use:     The reasoner image and the relighting image use it as the
+           base image.
+
+NVIDIA Isaac Sim
+  Source:  https://github.com/isaac-sim/IsaacSim
+  Version: 6.1.0
+  License: Apache License 2.0 for the source code. The NVIDIA Isaac Sim
+           Additional Software and Materials License applies to the
+           additional components, for example the Omniverse Kit SDK.
+  Use:     The scripts in sim/ run in the Python environment of
+           Isaac Sim.
+
+SO-ARM100 robot model
+  Source:  https://github.com/TheRobotStudio/SO-ARM100
+  Commit:  5f6d2b876a53a4872e405b991dd925556c9e38a4
+  License: Apache License 2.0
+  Use:     sim/scripts/fetch_so101.sh downloads the URDF file and the
+           mesh files to a local cache directory.
+
+Python packages
+  pyproject.toml and uv.lock list the Python packages that pixel2place
+  uses. The requirements files in serving/ list the Python packages of
+  the server images. The files learning/lerobot/pyproject.toml and
+  learning/lerobot/uv.lock list the Python packages of the training
+  environment, for example LeRobot (Apache License 2.0) and PyTorch.
+  The package managers download these packages.
+
+2.2 Models
+
+This repository does not contain model weights and does not distribute
+model weights. The config.env files in serving/ contain the model
+revisions.
+
+nvidia/Cosmos3-Nano
+  License: OpenMDW License Agreement, version 1.1 (OpenMDW-1.1)
+  Use:     The reasoner server and the generator server load this model.
+
+nvidia/Diffusion_Renderer_Inverse_Cosmos_7B
+nvidia/Diffusion_Renderer_Forward_Cosmos_7B
+nvidia/Cosmos-Tokenize1-CV8x8x8-720p
+  License: NVIDIA Open Model License
+  Use:     The relighting server loads these models.
+
+nvidia/Cosmos-1.0-Guardrail
+  License: NVIDIA Open Model License
+  Use:     The generator server loads this model when the guardrail is
+           on.
+
+nvidia/GR00T-N1.7-3B
+  License: The model card gives the NVIDIA Open Model License. The
+           LICENSE file in the model repository is the NVIDIA
+           License. The NVIDIA License permits non-commercial use
+           only. It defines non-commercial use as research or
+           evaluation.
+  Use:     The training environment in learning/lerobot/ loads this
+           model to fine-tune the policy of the slot task.
+           pixel2place does not distribute the fine-tuned weights.
+
+nvidia/Cosmos-Reason2-2B
+  License: NVIDIA Open Model License
+  Use:     The GR00T N1.7 code in LeRobot loads the tokenizer and
+           the image preprocessing settings of this model.
+
+ResNet-18 weights of torchvision (ResNet18_Weights.IMAGENET1K_V1)
+  License: The torchvision README gives no license for these
+           weights. It says that a pre-trained model can have terms
+           that come from its training dataset. The name of the
+           weights gives the dataset ImageNet-1k.
+  Use:     The ACT code in LeRobot loads these weights as the initial
+           values of the image encoder. The training environment in
+           learning/lerobot/ trains the ACT policy of the slot task.
+           pixel2place does not distribute the trained weights.
+
+NVIDIA Nemotron 3.5 Lightning
+  License: OpenMDW License Agreement, version 1.1 (OpenMDW-1.1). This is
+           the license of the weights that NVIDIA publishes as
+           nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16.
+  Use:     pixel2place calls the model through the Nebius Token Factory
+           API. The model ID is nvidia/Nemotron-3_5-Lightning.
+           pixel2place does not download the weights.
+
+NVIDIA Nemotron 3 Ultra
+  License: OpenMDW License Agreement, version 1.1 (OpenMDW-1.1). This is
+           the license of the weights that NVIDIA publishes as
+           nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16.
+  Use:     pixel2place calls the model through the Nebius Token Factory
+           API. The model ID is nvidia/Nemotron-3-Ultra-550b-a55b.
+           pixel2place does not download the weights.

@@ -1,0 +1,14 @@
+{
+  "kind": "board",
+  "parts": [
+    {"type": "square_tile", "color": "blue", "row": 0, "col": 0},
+    {"type": "square_tile", "color": "blue", "row": 0, "col": 7},
+    {"type": "square_tile", "color": "blue", "row": 7, "col": 0},
+    {"type": "rect_tile", "color": "gray", "rotation_deg": 90, "row": 0, "col": 3},
+    {"type": "rect_tile", "color": "gray", "row": 3, "col": 0},
+    {"type": "rect_tile", "color": "gray", "rotation_deg": 90, "row": 5, "col": 7},
+    {"type": "L_tile", "color": "orange", "rotation_deg": 90, "row": 2, "col": 4},
+    {"type": "L_tile", "color": "orange", "row": 5, "col": 4},
+    {"type": "T_tile", "color": "white", "rotation_deg": 180, "row": 5, "col": 1}
+  ]
+}

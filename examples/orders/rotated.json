@@ -1,0 +1,9 @@
+{
+  "kind": "board",
+  "parts": [
+    {"type": "L_tile", "color": "orange", "rotation_deg": 90, "row": 1, "col": 1},
+    {"type": "T_tile", "color": "white", "rotation_deg": 180, "row": 1, "col": 5},
+    {"type": "rect_tile", "color": "gray", "rotation_deg": 90, "row": 4, "col": 2},
+    {"type": "square_tile", "color": "blue", "row": 6, "col": 6}
+  ]
+}
